@@ -23,8 +23,8 @@ pipeline{
         }
         stage('deploying artifact to jfrog'){
             steps{
-                sh 'curl -uadmin:AP8gcgmmset5jeYChTJYDN6XmDd\
-                 -T /home/ec2-user/jenkins/workspace/ansible-master/main.zip
+                sh 'curl -uadmin:AP8gcgmmset5jeYChTJYDN6XmDd \
+                 -T /home/ec2-user/jenkins/workspace/ansible-master/main.zip \
                   "http://52.87.222.247:8081/artifactory/ansible-playbook/playbook_${BUILD_ID}.zip"'
             }
         }
