@@ -54,5 +54,10 @@ pipeline{
                 '''
             }
         }
+        stage("run playbook test.yml"){
+            steps{
+                sh 'ansible-playbook test.yml'
+            }
+        }
     }
 }
