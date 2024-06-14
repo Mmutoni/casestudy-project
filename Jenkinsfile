@@ -9,5 +9,11 @@ pipeline{
                 sh 'ls'
             }
         }
+        stage('create a zipfile'){
+            steps{
+                sh ' wget https://github.com/Mmutoni/casestudy-project.git/archive/refs/heads/main.zip'
+
+            }
+        }
     }
 }
