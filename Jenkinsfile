@@ -11,7 +11,7 @@ pipeline{
         }
         stage('create a zipfile'){
             steps{
-                sh ' wget https://github.com/Mmutoni/casestudy-project.git/archive/refs/heads/main.zip'
+         sh 'wget https://github.com/Mmutoni/casestudy-project/archive/refs/heads/main.zip'
 
             }
         }
