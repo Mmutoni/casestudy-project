@@ -41,7 +41,7 @@ pipeline{
                 '''
             }
         }
-        stages('check working node connectivity'){
+        stage('check working node connectivity'){
             steps{
                 sh 'ansible all -m ping'
             }
