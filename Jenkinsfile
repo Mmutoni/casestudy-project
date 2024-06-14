@@ -28,5 +28,18 @@ pipeline{
                   "http://52.87.222.247:8081/artifactory/ansible-playbook/playbook_${BUILD_ID}.zip"'
             }
         }
+        stage("deliver playbooks on /home/ec2-user/ansible"){
+            steps{
+                sh 'mkdir -p /home/ec2-user/ansible'
+                sh 'cp -f /home/ec2-user/jenkins/workspace/ansible-master/main.zip /home/ec2-user/ansible'
+                sh '''
+                cd /home/ec2-user/ansible
+                unzip -o main.zip
+                rm -f main.zip
+                cp -rf casestudy-project-main/* .
+                rm -rf casestudy-project-main/
+                '''
+            }
+        }
     }
 }
