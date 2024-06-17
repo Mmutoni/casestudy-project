@@ -1,4 +1,5 @@
-pipeline{
+/*pipeline{
+   
     agent {
         label 'ansible-agent'
     }
@@ -57,6 +58,19 @@ pipeline{
         stage("run playbook test.yml"){
             steps{
                 sh 'ansible-playbook test.yml'
+            }
+        }
+    }
+}
+
+*/
+pipeline{
+    agent any
+
+    stages{
+        stage('zip file'){
+            steps{
+                sh 'zip ansible-${BUILS_ID}.zip * --exclude Jenkinsfile'
             }
         }
     }
