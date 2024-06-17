@@ -71,7 +71,13 @@ pipeline{
         stage('zip file'){
             steps{
                 sh 'zip ansible-${BUILS_ID}.zip * --exclude Jenkinsfile'
-                sh 'ls -l'
+                
+            }
+        }
+        stage('upload artifact to jfrog'){
+            steps{
+                sh 'curl -uadmin:AP8gcgmmset5jeYChTJYDN6XmDd -T \
+                ansible-${BUILS_ID}.zip "http://3.89.20.113:8081/artifactory/ansible-playbook/ansible-${BUILS_ID}.zip"'
             }
         }
     }
