@@ -70,14 +70,26 @@ pipeline{
     stages{
         stage('zip file'){
             steps{
-                sh 'zip ansible-${BUILS_ID}.zip * --exclude Jenkinsfile'
+                sh 'zip ansible-${BUILD_ID}.zip * --exclude Jenkinsfile'
                 
             }
         }
         stage('upload artifact to jfrog'){
             steps{
                 sh 'curl -uadmin:AP8gcgmmset5jeYChTJYDN6XmDd -T \
-                ansible-${BUILS_ID}.zip "http://3.89.20.113:8081/artifactory/ansible-playbook/ansible-${BUILS_ID}.zip"'
+                ansible-${BUILS_ID}.zip "http://3.89.20.113:8081/artifactory/ansible-playbook/ansible-${BUILD_ID}.zip"'
+            }
+        }
+        stage('publish to ansible server'){
+            steps{
+                sshPublisher(publishers:\
+                    [sshPublisherDesc(configName: 'ansibleserver',\
+                    transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: 'ls', \
+                    execTimeout: 120000, flatten: false, makeEmptyDirs: false, \
+                    noDefaultExcludes: false, patternSeparator: '[, ]+', \
+                    remoteDirectory: '/home/ec2-user', \
+                    remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'ansible-${BUILD_ID].zip')], \
+                usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
     }
