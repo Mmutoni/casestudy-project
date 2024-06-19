@@ -76,7 +76,7 @@ pipeline{
                     shopt -s extglob
                     mv !(ansible-dev) ansible-dev/
                     '''
-                dir ('/var/lib/jenkins/workspace/ansible-playbook-class/ansible-dev'){
+                dir ('/var/lib/jenkins/workspace/ansible-playbook/ansible-dev'){
                     sh 'rm -rf *.zip || echo ""'
                     sh 'zip -r ansible-${BUILD_ID}.zip * --exclude Jenkinsfile'
                 }
