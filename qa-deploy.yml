@@ -6,8 +6,8 @@
   tasks:
    - name: delete old artifact
       file:
-      path: /opt/qa/spg/*.jar
-      state: absent
+        path: /opt/qa/spg/*.jar
+        state: absent
 
     - name: get PID
       file:
@@ -20,10 +20,10 @@
 
     - name: Download new artfact
       get_url:
-      url: http://34.201.161.49:8081/artifactory/geolocation/geo/bio_17.jar
-      dest: /opt/qa/spg 
-      url_username: admin
-      url_password: password
+        url: http://34.201.161.49:8081/artifactory/geolocation/geo/bio_17.jar
+        dest: /opt/qa/spg 
+        url_username: admin
+        url_password: password
 
     - name: Run the App
       shell: nohup java -jar /opt/qa/spg/*.jar > /opt/qa/spg.log 2>&1 &
